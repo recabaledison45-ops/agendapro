@@ -1,25 +1,71 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login | AgendaPro</title>
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-<body>
+      <p>Ingresa a tu panel administrativo</p>
+    </div>
 
-<section class="login-section">
-  <div class="login-box">
+    <form class="login-form">
 
-    <h2>Iniciar sesión</h2>
+      <div class="input-group">
+        <label>Correo electrónico</label>
+        <input type="email" placeholder="correo@empresa.com" required>
+      </div>
 
-    <input type="email" placeholder="Correo">
-    <input type="password" placeholder="Contraseña">
+      <div class="input-group">
+        <label>Contraseña</label>
 
-    <button class="btn primary">Entrar</button>
+        <div class="password-wrapper">
+          <input type="password" id="password" placeholder="••••••••" required>
+
+          <button type="button" class="toggle-password" onclick="togglePassword()">
+            👁️
+          </button>
+        </div>
+      </div>
+
+      <div class="login-options">
+
+        <label class="remember-me">
+          <input type="checkbox">
+          Recordarme
+        </label>
+
+        <a href="#">¿Olvidaste tu contraseña?</a>
+
+      </div>
+
+      <button class="btn-login">
+        Ingresar
+      </button>
+
+      <div class="divider">
+        <span>o continuar con</span>
+      </div>
+
+      <button type="button" class="google-btn">
+        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google">
+        Continuar con Google
+      </button>
+
+    </form>
 
   </div>
+
 </section>
+
+<script>
+
+function togglePassword(){
+
+  const password = document.getElementById('password');
+
+  if(password.type === 'password'){
+    password.type = 'text';
+  } else {
+    password.type = 'password';
+  }
+
+}
+
+</script>
 
 </body>
 </html>

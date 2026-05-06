@@ -1,27 +1,672 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contacto | AgendaPro</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto — AgendaPro</title>
+  <meta name="description" content="Habla con nuestro equipo. Respondemos en menos de 2 horas." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📅</text></svg>" />
+  <style>
+    /* ─── CONTACT PAGE ─── */
+    .contact-hero {
+      padding: 140px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-hero::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 500px;
+      background: radial-gradient(ellipse, rgba(79,124,255,0.13) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .contact-hero p {
+      font-size: 1.1rem;
+      color: var(--text-2);
+      max-width: 520px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Contact Grid */
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* Sidebar cards */
+    .contact-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .contact-info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: var(--transition);
+    }
+
+    .contact-info-card:hover {
+      border-color: var(--border-2);
+      transform: translateY(-2px);
+    }
+
+    .cic-icon {
+      width: 44px; height: 44px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+    }
+
+    .cic-icon.blue { background: var(--accent-soft); }
+    .cic-icon.teal { background: var(--teal-soft); }
+    .cic-icon.amber { background: rgba(255,200,79,0.12); }
+    .cic-icon.green { background: rgba(34,197,94,0.12); }
+
+    .cic-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .cic-value {
+      font-size: 0.82rem;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    .cic-value a {
+      color: var(--accent);
+      transition: var(--transition);
+    }
+    .cic-value a:hover { color: var(--text); }
+
+    /* WhatsApp CTA */
+    .whatsapp-card {
+      background: linear-gradient(135deg, rgba(37,211,102,0.15), rgba(37,211,102,0.05));
+      border: 1px solid rgba(37,211,102,0.25);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+
+    .whatsapp-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(37,211,102,0.12);
+      border-color: rgba(37,211,102,0.4);
+    }
+
+    .wa-icon {
+      width: 52px; height: 52px;
+      background: #25D366;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+    }
+
+    .wa-text { flex: 1; }
+    .wa-title { font-size: 0.95rem; font-weight: 700; color: #25D366; }
+    .wa-sub { font-size: 0.8rem; color: var(--text-3); margin-top: 2px; }
+
+    .wa-arrow { color: #25D366; font-size: 1.1rem; }
+
+    /* Social media row */
+    .social-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .social-link-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-2);
+      transition: var(--transition);
+    }
+
+    .social-link-card:hover {
+      border-color: var(--border-2);
+      color: var(--text);
+      transform: translateY(-2px);
+    }
+
+    /* Response time badge */
+    .response-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(79,124,255,0.2);
+      border-radius: var(--radius);
+      font-size: 0.82rem;
+      color: var(--text-2);
+    }
+
+    .response-dot {
+      width: 8px; height: 8px;
+      background: var(--teal);
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulse 2s infinite;
+    }
+
+    /* Form card */
+    .contact-form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-form-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--teal));
+    }
+
+    .form-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .form-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-3);
+      margin-bottom: 28px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field-error {
+      display: none;
+      font-size: 0.75rem;
+      color: #FF5C5C;
+      margin-top: 4px;
+    }
+
+    .form-submit {
+      width: 100%;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: var(--white);
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+      margin-top: 6px;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px var(--accent-glow);
+    }
+
+    .form-submit:active { transform: translateY(0); }
+
+    .form-disclaimer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--text-3);
+      margin-top: 12px;
+    }
+
+    /* Select */
+    select.form-input {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A6A84' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+    }
+
+    select.form-input option { background: var(--surface); color: var(--text); }
+
+    /* FAQ Section */
+    .contact-faq { padding: 80px 0; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .mini-faq {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      transition: var(--transition);
+    }
+    .mini-faq:hover { border-color: var(--border-2); }
+    .mini-faq h4 {
+      font-size: 0.88rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .mini-faq p { font-size: 0.82rem; color: var(--text-2); line-height: 1.65; }
+
+    @media (max-width: 900px) {
+      .contact-layout { grid-template-columns: 1fr; }
+      .contact-sidebar { order: 2; }
+      .contact-form-card { order: 1; }
+    }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-card { padding: 24px; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .social-row { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
-<body>
+<body class="grid-bg noise">
 
-<section class="contact-section">
-  <div class="container contact-box">
+<!-- ─── NAVBAR ─── -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">📅</div>
+      AgendaPro
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="funcionalidades.html">Funcionalidades</a></li>
+      <li><a href="precios.html">Precios</a></li>
+      <li><a href="contacto.html" class="active">Contacto</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-ghost btn-sm">Iniciar sesión</a>
+      <a href="precios.html" class="btn btn-primary btn-sm">Empezar gratis</a>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-    <h2>Contáctanos</h2>
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Inicio</a>
+  <a href="funcionalidades.html">Funcionalidades</a>
+  <a href="precios.html">Precios</a>
+  <a href="contacto.html">Contacto</a>
+  <div class="mobile-nav-sep"></div>
+  <a href="login.html">Iniciar sesión</a>
+  <a href="precios.html" style="color:var(--accent);font-weight:600;">Empezar gratis →</a>
+</div>
 
-    <form>
-      <input type="text" placeholder="Nombre" required>
-      <input type="email" placeholder="Correo electrónico" required>
-      <textarea placeholder="Escribe tu mensaje"></textarea>
-      <button class="btn primary">Enviar</button>
-    </form>
-
+<!-- ─── HERO ─── -->
+<section class="contact-hero">
+  <div class="container">
+    <span class="section-label animate-in">✉️ Contacto</span>
+    <h1 class="animate-in delay-1">Hablemos sobre<br><span class="gradient-text">tu negocio</span></h1>
+    <p class="animate-in delay-2">Nuestro equipo responde en menos de 2 horas en días hábiles. También puedes escribirnos por WhatsApp.</p>
   </div>
 </section>
 
+<!-- ─── CONTACT MAIN ─── -->
+<section class="section" style="padding-top:40px">
+  <div class="container">
+    <div class="contact-layout">
+
+      <!-- Sidebar -->
+      <div class="contact-sidebar animate-in delay-1">
+
+        <!-- Response time -->
+        <div class="response-badge">
+          <div class="response-dot"></div>
+          <span>Respondemos en <strong style="color:var(--text)">menos de 2 horas</strong> · Lun–Vie</span>
+        </div>
+
+        <!-- WhatsApp CTA -->
+        <a href="https://wa.me/56900000000?text=Hola%2C%20me%20interesa%20AgendaPro" target="_blank" class="whatsapp-card">
+          <div class="wa-icon">💬</div>
+          <div class="wa-text">
+            <div class="wa-title">Chatea por WhatsApp</div>
+            <div class="wa-sub">Respuesta inmediata</div>
+          </div>
+          <span class="wa-arrow">→</span>
+        </a>
+
+        <!-- Contact Info Cards -->
+        <div class="contact-info-card">
+          <div class="cic-icon blue">📧</div>
+          <div class="cic-title">Correo electrónico</div>
+          <div class="cic-value">
+            <a href="mailto:hola@agendapro.app">hola@agendapro.app</a><br>
+            <a href="mailto:soporte@agendapro.app">soporte@agendapro.app</a>
+          </div>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="cic-icon teal">📍</div>
+          <div class="cic-title">Oficina central</div>
+          <div class="cic-value">Providencia, Santiago de Chile<br>Latinoamérica</div>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="cic-icon amber">🕐</div>
+          <div class="cic-title">Horario de atención</div>
+          <div class="cic-value">
+            Lunes a Viernes: 9:00 – 19:00<br>
+            Sábados: 10:00 – 14:00
+          </div>
+        </div>
+
+        <!-- Social links -->
+        <div>
+          <div class="footer-col-title" style="margin-bottom:12px;">Síguenos</div>
+          <div class="social-row">
+            <a href="#" class="social-link-card">
+              <span>𝕏</span> Twitter / X
+            </a>
+            <a href="#" class="social-link-card">
+              <span>in</span> LinkedIn
+            </a>
+            <a href="#" class="social-link-card">
+              <span>◎</span> Instagram
+            </a>
+            <a href="#" class="social-link-card">
+              <span>▶</span> YouTube
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Form Card -->
+      <div class="contact-form-card animate-in delay-2">
+        <div class="form-title">Envíanos un mensaje</div>
+        <div class="form-subtitle">Te responderemos lo antes posible con una solución personalizada.</div>
+
+        <form id="contact-form" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="nombre">Nombre *</label>
+              <div class="input-wrapper">
+                <span class="input-icon">👤</span>
+                <input class="form-input" type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+              </div>
+              <span class="field-error" id="error-nombre"></span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="correo">Correo *</label>
+              <div class="input-wrapper">
+                <span class="input-icon">✉️</span>
+                <input class="form-input" type="email" id="correo" name="correo" placeholder="tu@empresa.com" required />
+              </div>
+              <span class="field-error" id="error-correo"></span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="empresa">Empresa</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🏢</span>
+                <input class="form-input" type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="telefono">Teléfono</label>
+              <div class="input-wrapper">
+                <span class="input-icon">📱</span>
+                <input class="form-input" type="tel" id="telefono" name="telefono" placeholder="+56 9 0000 0000" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="motivo">¿En qué podemos ayudarte?</label>
+            <select class="form-input" id="motivo" name="motivo">
+              <option value="" disabled selected>Selecciona un motivo</option>
+              <option value="demo">Quiero una demo</option>
+              <option value="sales">Información de planes</option>
+              <option value="support">Soporte técnico</option>
+              <option value="partner">Ser partner o revendedor</option>
+              <option value="other">Otro</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="mensaje">Mensaje *</label>
+            <textarea class="form-input" id="mensaje" name="mensaje" placeholder="Cuéntanos sobre tu negocio y cómo podemos ayudarte..." rows="5" required></textarea>
+            <span class="field-error" id="error-mensaje"></span>
+          </div>
+
+          <button type="submit" class="form-submit" id="contact-submit">
+            Enviar mensaje →
+          </button>
+
+          <p class="form-disclaimer">
+            🔒 Tu información está segura. No hacemos spam ni compartimos tus datos.
+          </p>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── QUICK FAQ ─── -->
+<section class="contact-faq">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">❓ Respuestas rápidas</span>
+      <h2>Preguntas más frecuentes</h2>
+    </div>
+
+    <div class="faq-grid">
+      <div class="mini-faq">
+        <h4>⏱️ ¿Cuánto tarda la configuración?</h4>
+        <p>Menos de 10 minutos. Solo necesitas crear tu cuenta, personalizar tu página de reservas y compartir el link con tus clientes.</p>
+      </div>
+      <div class="mini-faq">
+        <h4>🌎 ¿Funciona fuera de Chile?</h4>
+        <p>Sí. AgendaPro funciona en toda Latinoamérica. Tenemos clientes en Chile, Argentina, Colombia, México, Perú y más.</p>
+      </div>
+      <div class="mini-faq">
+        <h4>💻 ¿Necesito instalar algo?</h4>
+        <p>No. AgendaPro funciona 100% en la nube desde cualquier navegador. Sin apps, sin instalaciones, sin complicaciones.</p>
+      </div>
+      <div class="mini-faq">
+        <h4>📱 ¿Mis clientes necesitan app?</h4>
+        <p>No. Tus clientes reservan desde una página web que puedes compartir por WhatsApp, Instagram o en tu sitio web.</p>
+      </div>
+      <div class="mini-faq">
+        <h4>🔄 ¿Ofrecen migración de datos?</h4>
+        <p>Sí. Si tienes clientes en Excel, Google Sheets u otra plataforma, nuestro equipo te ayuda a migrarlos sin costo.</p>
+      </div>
+      <div class="mini-faq">
+        <h4>🎓 ¿Hay capacitación incluida?</h4>
+        <p>Todos los planes incluyen acceso a video tutoriales, guías y una sesión de onboarding en vivo con nuestro equipo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <span class="section-label">🚀 Sin esperas</span>
+      <h2>¿Prefieres verlo en acción<br><span class="gradient-text">ahora mismo?</span></h2>
+      <p>Crea tu cuenta y explora AgendaPro por 14 días sin costo ni compromiso.</p>
+      <div class="cta-actions">
+        <a href="precios.html" class="btn btn-primary btn-lg">Crear cuenta gratis</a>
+        <a href="https://wa.me/56900000000" target="_blank" class="btn btn-secondary btn-lg">💬 WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:0">
+          <div class="nav-logo-icon">📅</div>
+          AgendaPro
+        </a>
+        <p>La plataforma SaaS de gestión más elegante para PYMEs en Latinoamérica.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Producto</div>
+        <ul class="footer-links">
+          <li><a href="funcionalidades.html">Funcionalidades</a></li>
+          <li><a href="precios.html">Precios</a></li>
+          <li><a href="#">Integraciones</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Empresa</div>
+        <ul class="footer-links">
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a href="#">Privacidad</a></li>
+          <li><a href="#">Términos</a></li>
+          <li><a href="#">Seguridad</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AgendaPro — Todos los derechos reservados.</span>
+      <div class="footer-socials">
+        <a href="#" class="social-btn">𝕏</a>
+        <a href="#" class="social-btn">in</a>
+        <a href="#" class="social-btn">◎</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // Enhanced contact form
+  const form = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('contact-submit');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const nombre = document.getElementById('nombre');
+    const correo = document.getElementById('correo');
+    const mensaje = document.getElementById('mensaje');
+
+    let valid = true;
+
+    [nombre, correo, mensaje].forEach(input => {
+      const err = document.getElementById('error-' + input.id);
+      const val = input.value.trim();
+
+      if (!val) {
+        input.classList.add('error');
+        if (err) { err.textContent = 'Este campo es requerido'; err.style.display = 'block'; }
+        valid = false;
+      } else if (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+        input.classList.add('error');
+        if (err) { err.textContent = 'Ingresa un email válido'; err.style.display = 'block'; }
+        valid = false;
+      } else {
+        input.classList.remove('error');
+        if (err) { err.textContent = ''; err.style.display = 'none'; }
+      }
+    });
+
+    if (valid) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span style="display:inline-block;animation:spin 1s linear infinite">⟳</span> Enviando...';
+
+      setTimeout(() => {
+        submitBtn.innerHTML = '✓ Mensaje enviado — te contactaremos pronto';
+        submitBtn.style.background = 'linear-gradient(135deg, #00D4B8, #00A896)';
+        submitBtn.style.boxShadow = '0 4px 20px rgba(0,212,184,0.3)';
+        form.reset();
+        setTimeout(() => {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = 'Enviar otro mensaje →';
+          submitBtn.style.background = '';
+          submitBtn.style.boxShadow = '';
+        }, 4000);
+      }, 1200);
+    }
+  });
+
+  // Live validation
+  ['nombre','correo','mensaje'].forEach(id => {
+    const input = document.getElementById(id);
+    input?.addEventListener('input', () => {
+      if (input.classList.contains('error') && input.value.trim()) {
+        input.classList.remove('error');
+        const err = document.getElementById('error-' + id);
+        if (err) { err.textContent = ''; err.style.display = 'none'; }
+      }
+    });
+  });
+</script>
+
+<style>
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
 </body>
 </html>

@@ -1,100 +1,359 @@
 <!DOCTYPE html>
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AgendaPro | Sistema SaaS para PYMEs</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <title>AgendaPro — SaaS de Gestión para PYMEs</title>
+  <meta name="description" content="Automatiza tu negocio con AgendaPro. Agenda online, recordatorios WhatsApp y control total para tu empresa." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📅</text></svg>" />
 </head>
-<body>
+<body class="grid-bg noise">
 
-<nav class="navbar">
-  <div class="container nav-content">
-    <h1 class="logo">AgendaPro</h1>
+<!-- ─── NAVBAR ─── -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">📅</div>
+      AgendaPro
+    </a>
 
     <ul class="nav-links">
-      <li><a href="index.html">Inicio</a></li>
+      <li><a href="index.html" class="active">Inicio</a></li>
       <li><a href="funcionalidades.html">Funcionalidades</a></li>
       <li><a href="precios.html">Precios</a></li>
       <li><a href="contacto.html">Contacto</a></li>
     </ul>
 
-    <a href="login.html" class="btn">Iniciar sesión</a>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-ghost btn-sm">Iniciar sesión</a>
+      <a href="precios.html" class="btn btn-primary btn-sm">Empezar gratis</a>
+    </div>
+
+    <button class="nav-mobile-toggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
-<section class="hero">
-  <div class="container hero-grid">
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Inicio</a>
+  <a href="funcionalidades.html">Funcionalidades</a>
+  <a href="precios.html">Precios</a>
+  <a href="contacto.html">Contacto</a>
+  <div class="mobile-nav-sep"></div>
+  <a href="login.html">Iniciar sesión</a>
+  <a href="precios.html" style="color: var(--accent); font-weight: 600;">Empezar gratis →</a>
+</div>
 
-    <div>
-      <span class="badge">🚀 SaaS para negocios modernos</span>
+<!-- ─── HERO ─── -->
+<section class="hero-section">
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <div class="hero-glow hero-glow-3"></div>
 
-      <h2>
-        Gestiona tu negocio <br>
-        sin perder clientes
-      </h2>
-
-      <p>
-        Agenda online, automatización y control total para tu empresa.
-      </p>
-
-      <div class="hero-buttons">
-        <a href="precios.html" class="btn primary">Comenzar</a>
-        <a href="funcionalidades.html" class="btn secondary">Ver demo</a>
-      </div>
-    </div>
-
-    <div class="dashboard-card">
-      <h3>📊 Dashboard</h3>
-
-      <div class="stats">
-        <div class="stat">
-          <strong>48</strong>
-          <span>Reservas</span>
-        </div>
-
-        <div class="stat">
-          <strong>$842K</strong>
-          <span>Ingresos</span>
-        </div>
-
-        <div class="stat">
-          <strong>96%</strong>
-          <span>Asistencia</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="benefits">
   <div class="container">
-    <h2 class="section-title">¿Por qué usar AgendaPro?</h2>
+    <div class="hero-grid">
 
-    <div class="cards">
+      <!-- Left Content -->
+      <div class="hero-content animate-in">
+        <div class="hero-badge">
+          <span class="hero-badge-dot">🚀</span>
+          Nuevo: Integración nativa con WhatsApp Business
+        </div>
 
-      <div class="card">
-        <h3>⏱️ Ahorra tiempo</h3>
-        <p>Automatiza reservas y recordatorios.</p>
+        <h1 class="hero-title">
+          Gestiona tu negocio<br>
+          <span class="gradient-text">sin perder clientes</span>
+        </h1>
+
+        <p class="hero-desc">
+          Agenda online 24/7, automatización de recordatorios y métricas en tiempo real. Todo lo que necesita tu PYME para crecer.
+        </p>
+
+        <div class="hero-cta">
+          <a href="precios.html" class="btn btn-primary btn-lg">
+            Empezar gratis
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="funcionalidades.html" class="btn btn-secondary btn-lg">Ver demo</a>
+        </div>
+
+        <div class="hero-social-proof">
+          <div class="avatars">
+            <div class="avatar">MG</div>
+            <div class="avatar">RV</div>
+            <div class="avatar">AL</div>
+            <div class="avatar">CP</div>
+            <div class="avatar" style="background: var(--accent);">+</div>
+          </div>
+          <p class="social-proof-text">
+            <strong>+2.400 PYMEs</strong> confían en AgendaPro hoy
+          </p>
+        </div>
       </div>
 
-      <div class="card">
-        <h3>📈 Más clientes</h3>
-        <p>Tu negocio disponible 24/7.</p>
-      </div>
+      <!-- Right Visual -->
+      <div class="hero-visual animate-in delay-2">
+        <div class="dashboard-preview">
+          <div class="dash-header">
+            <span class="dash-title">📊 Panel de Control</span>
+            <span class="dash-status">
+              <span class="dash-status-dot"></span>
+              En vivo
+            </span>
+          </div>
 
-      <div class="card">
-        <h3>🤖 Automatización</h3>
-        <p>WhatsApp y correos automáticos.</p>
+          <div class="dash-stats">
+            <div class="dash-stat">
+              <span class="dash-stat-num">48</span>
+              <span class="dash-stat-label">Reservas hoy</span>
+              <span class="dash-stat-change">↑ +12%</span>
+            </div>
+            <div class="dash-stat">
+              <span class="dash-stat-num">$842K</span>
+              <span class="dash-stat-label">Ingresos</span>
+              <span class="dash-stat-change">↑ +8.4%</span>
+            </div>
+            <div class="dash-stat">
+              <span class="dash-stat-num">96%</span>
+              <span class="dash-stat-label">Asistencia</span>
+              <span class="dash-stat-change">↑ +3%</span>
+            </div>
+          </div>
+
+          <div class="dash-chart">
+            <div class="chart-label">Reservas esta semana</div>
+            <div class="chart-bars">
+              <div class="bar" style="height:45%"></div>
+              <div class="bar" style="height:65%"></div>
+              <div class="bar" style="height:55%"></div>
+              <div class="bar active" style="height:85%"></div>
+              <div class="bar" style="height:70%"></div>
+              <div class="bar" style="height:90%"></div>
+              <div class="bar" style="height:60%"></div>
+            </div>
+          </div>
+
+          <div class="dash-appointments">
+            <div class="appointment-row">
+              <span class="appt-client">👤 María González</span>
+              <span class="appt-time">10:30</span>
+              <span class="appt-badge confirmed">Confirmado</span>
+            </div>
+            <div class="appointment-row">
+              <span class="appt-client">👤 Carlos Pérez</span>
+              <span class="appt-time">11:00</span>
+              <span class="appt-badge pending">Pendiente</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Floating Cards -->
+        <div class="floating-card floating-card-1">
+          <span class="fc-icon">💬</span>
+          <span class="fc-value">WhatsApp enviado</span><br>
+          <span class="fc-label">Recordatorio automático</span>
+        </div>
+        <div class="floating-card floating-card-2">
+          <span class="fc-icon">✅</span>
+          <span class="fc-value">+18 reservas nuevas</span><br>
+          <span class="fc-label">Últimas 24 horas</span>
+        </div>
       </div>
 
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="container footer-content">
-    <p>© 2026 AgendaPro — Todos los derechos reservados.</p>
+<!-- ─── METRICS STRIP ─── -->
+<div class="metrics-strip">
+  <div class="container">
+    <div class="metrics-grid">
+      <div class="metric-item">
+        <span class="metric-num" data-count="2400">0</span>
+        <span class="metric-label">PYMEs activas</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-num" data-count="150000">0</span>
+        <span class="metric-label">Reservas procesadas</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-num" data-count="98">0</span>
+        <span class="metric-label">% satisfacción cliente</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-num" data-count="40">0</span>
+        <span class="metric-label">% aumento en ingresos</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── FEATURES ─── -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">✦ Funcionalidades</span>
+      <h2>Todo lo que tu negocio necesita</h2>
+      <p>Herramientas diseñadas para automatizar cada parte de tu operación diaria</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📅</div>
+        <h3>Agenda Inteligente</h3>
+        <p>Tus clientes reservan en línea 24/7 desde cualquier dispositivo. Sincroniza con Google Calendar automáticamente.</p>
+        <span class="feature-tag">→ Disponible 24/7</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>WhatsApp Automático</h3>
+        <p>Recordatorios, confirmaciones y notificaciones se envían automáticamente por WhatsApp y correo.</p>
+        <span class="feature-tag">→ 0 ausencias sin aviso</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Métricas en Tiempo Real</h3>
+        <p>Dashboard completo con ingresos, asistencia, clientes nuevos y proyecciones para tomar decisiones.</p>
+        <span class="feature-tag">→ Datos siempre actuales</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">👥</div>
+        <h3>Gestión de Clientes</h3>
+        <p>CRM integrado con historial completo, notas, preferencias y segmentación automática por comportamiento.</p>
+        <span class="feature-tag">→ CRM incluido</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💳</div>
+        <h3>Pagos en Línea</h3>
+        <p>Acepta pagos al momento de reservar. Integración nativa con Transbank, Stripe y MercadoPago.</p>
+        <span class="feature-tag">→ Cobros automáticos</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>Integraciones</h3>
+        <p>Conecta con Google Calendar, Outlook, Zoom, Instagram y más de 50 herramientas en un clic.</p>
+        <span class="feature-tag">→ +50 integraciones</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">★ Testimonios</span>
+      <h2>Lo que dicen nuestros clientes</h2>
+      <p>Más de 2.400 empresas ya transformaron su gestión con AgendaPro</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Pasamos de perder el 30% de clientes por falta de recordatorios a tener una asistencia casi perfecta. AgendaPro cambió nuestro negocio."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MV</div>
+          <div>
+            <div class="author-name">María Valenzuela</div>
+            <div class="author-role">Centro de estética, Santiago</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"El dashboard de métricas nos ayuda a entender exactamente qué servicios son más rentables. Aumentamos ingresos un 45% en 3 meses."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: linear-gradient(135deg,#00D4B8,#4F7CFF)">RC</div>
+          <div>
+            <div class="author-name">Rodrigo Castillo</div>
+            <div class="author-role">Clínica dental, Valparaíso</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Implementación en menos de una hora. El soporte técnico es increíble. Ahora todo el equipo usa AgendaPro y es mucho más eficiente."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: linear-gradient(135deg,#7C5CFF,#FF5C8A)">AL</div>
+          <div>
+            <div class="author-name">Andrea Lagos</div>
+            <div class="author-role">Consultora, Concepción</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <span class="section-label">🎯 Empieza hoy</span>
+      <h2>Transforma tu negocio<br><span class="gradient-text">en menos de 1 hora</span></h2>
+      <p>Sin tarjeta de crédito. Sin contrato. 14 días gratis con todas las funciones.</p>
+      <div class="cta-actions">
+        <a href="precios.html" class="btn btn-primary btn-lg">Crear cuenta gratis</a>
+        <a href="contacto.html" class="btn btn-secondary btn-lg">Hablar con ventas</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:0">
+          <div class="nav-logo-icon">📅</div>
+          AgendaPro
+        </a>
+        <p>La plataforma SaaS de gestión de citas más elegante para PYMEs en Latinoamérica.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Producto</div>
+        <ul class="footer-links">
+          <li><a href="funcionalidades.html">Funcionalidades</a></li>
+          <li><a href="precios.html">Precios</a></li>
+          <li><a href="#">Integraciones</a></li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Empresa</div>
+        <ul class="footer-links">
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a href="#">Privacidad</a></li>
+          <li><a href="#">Términos</a></li>
+          <li><a href="#">Cookies</a></li>
+          <li><a href="#">Seguridad</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 AgendaPro — Todos los derechos reservados.</span>
+      <div class="footer-socials">
+        <a href="#" class="social-btn" title="Twitter/X">𝕏</a>
+        <a href="#" class="social-btn" title="LinkedIn">in</a>
+        <a href="#" class="social-btn" title="Instagram">◎</a>
+        <a href="#" class="social-btn" title="YouTube">▶</a>
+      </div>
+    </div>
   </div>
 </footer>
 

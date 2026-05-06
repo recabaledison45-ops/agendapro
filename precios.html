@@ -1,44 +1,428 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Precios | AgendaPro</title>
-  <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Precios — AgendaPro</title>
+  <meta name="description" content="Planes flexibles para PYMEs de todos los tamaños. Empieza gratis hoy." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📅</text></svg>" />
+  <style>
+    .pricing-hero { padding: 140px 0 60px; text-align: center; position: relative; overflow: hidden; }
+    .pricing-hero::before {
+      content: ''; position: absolute; top:0; left:50%; transform:translateX(-50%);
+      width:700px; height:500px;
+      background: radial-gradient(ellipse, rgba(79,124,255,0.13) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pricing-hero h1 { font-size: clamp(2.4rem,5vw,4rem); font-weight:800; letter-spacing:-0.03em; margin-bottom:16px; position:relative; }
+    .pricing-hero p { font-size:1.1rem; color:var(--text-2); max-width:520px; margin:0 auto 32px; position:relative; }
+
+    /* Toggle */
+    .billing-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 6px;
+      position: relative;
+    }
+
+    .toggle-btn {
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-3);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .toggle-btn.active {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: var(--white);
+    }
+
+    .toggle-save {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--teal-soft);
+      color: var(--teal);
+      border: 1px solid rgba(0,212,184,0.2);
+      border-radius: 100px;
+      padding: 3px 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      margin-left: 8px;
+    }
+
+    /* FAQ */
+    .faq-list { max-width: 700px; margin: 0 auto; }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+      overflow: hidden;
+      background: var(--surface);
+      transition: var(--transition);
+    }
+    .faq-item:hover { border-color: var(--border-2); }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px;
+      cursor: pointer;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+      user-select: none;
+    }
+
+    .faq-arrow {
+      width: 24px; height: 24px;
+      background: var(--bg-2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--text-3);
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .faq-item.open .faq-arrow { transform: rotate(180deg); background: var(--accent-soft); color: var(--accent); }
+
+    .faq-answer {
+      display: none;
+      padding: 0 22px 18px;
+      font-size: 0.88rem;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    .faq-item.open .faq-answer { display: block; }
+
+    /* Trust logos */
+    .trust-section { padding: 60px 0; text-align: center; }
+    .trust-label { font-size: 0.78rem; color: var(--text-3); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 24px; }
+    .trust-logos {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .trust-logo {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-3);
+      opacity: 0.5;
+      letter-spacing: -0.01em;
+      transition: var(--transition);
+    }
+    .trust-logo:hover { opacity: 0.8; color: var(--text-2); }
+  </style>
 </head>
-<body>
+<body class="grid-bg noise">
 
-<section class="pricing-section">
+<!-- ─── NAVBAR ─── -->
+<nav class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="nav-logo-icon">📅</div>
+      AgendaPro
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="funcionalidades.html">Funcionalidades</a></li>
+      <li><a href="precios.html" class="active">Precios</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="btn btn-ghost btn-sm">Iniciar sesión</a>
+      <a href="#" class="btn btn-primary btn-sm">Empezar gratis</a>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobile-nav">
+  <a href="index.html">Inicio</a>
+  <a href="funcionalidades.html">Funcionalidades</a>
+  <a href="precios.html">Precios</a>
+  <a href="contacto.html">Contacto</a>
+  <div class="mobile-nav-sep"></div>
+  <a href="login.html">Iniciar sesión</a>
+  <a href="#" style="color:var(--accent);font-weight:600;">Empezar gratis →</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section class="pricing-hero">
   <div class="container">
+    <span class="section-label animate-in">💎 Precios transparentes</span>
+    <h1 class="animate-in delay-1">Elige el plan<br><span class="gradient-text">perfecto para tu negocio</span></h1>
+    <p class="animate-in delay-2">Sin contratos. Sin sorpresas. Cancela cuando quieras.</p>
 
-    <h2 class="section-title">Planes y precios</h2>
-
-    <div class="pricing-grid">
-
-      <div class="price-card">
-        <h3>Básico</h3>
-        <h2>$9.990</h2>
-        <p>/mes</p>
-        <a href="#" class="btn primary">Elegir</a>
+    <div class="animate-in delay-3">
+      <div class="billing-toggle" id="billingToggle">
+        <span class="toggle-btn active" data-period="monthly">Mensual</span>
+        <span class="toggle-btn" data-period="annual">
+          Anual
+          <span class="toggle-save">Ahorra 30%</span>
+        </span>
       </div>
-
-      <div class="price-card featured">
-        <h3>Profesional</h3>
-        <h2>$19.990</h2>
-        <p>/mes</p>
-        <a href="#" class="btn primary">Elegir</a>
-      </div>
-
-      <div class="price-card">
-        <h3>Empresa</h3>
-        <h2>$39.990</h2>
-        <p>/mes</p>
-        <a href="#" class="btn primary">Elegir</a>
-      </div>
-
     </div>
   </div>
 </section>
 
+<!-- ─── PRICING CARDS ─── -->
+<section class="section" style="padding-top:40px">
+  <div class="container">
+    <div class="pricing-grid">
+
+      <!-- Starter -->
+      <div class="pricing-card">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">
+          <span class="price-currency">$</span>
+          <span class="price-amount" data-monthly="0" data-annual="0">0</span>
+          <span class="price-period">/mes</span>
+        </div>
+        <p class="plan-desc">Perfecto para comenzar. Sin límite de tiempo.</p>
+
+        <div class="plan-features">
+          <div class="plan-feature"><div class="feature-check">✓</div> Hasta 30 reservas/mes</div>
+          <div class="plan-feature"><div class="feature-check">✓</div> 1 profesional</div>
+          <div class="plan-feature"><div class="feature-check">✓</div> Página de reservas</div>
+          <div class="plan-feature"><div class="feature-check">✓</div> Confirmaciones por email</div>
+          <div class="plan-feature"><div class="feature-check">✓</div> Dashboard básico</div>
+        </div>
+
+        <a href="#" class="btn btn-secondary" style="width:100%;justify-content:center;">
+          Empezar gratis
+        </a>
+      </div>
+
+      <!-- Pro (Featured) -->
+      <div class="pricing-card featured">
+        <div class="featured-badge">✦ Más popular</div>
+        <div class="plan-name" style="color:var(--accent)">Pro</div>
+        <div class="plan-price">
+          <span class="price-currency">$</span>
+          <span class="price-amount" data-monthly="29.900" data-annual="20.900">29.900</span>
+          <span class="price-period">/mes</span>
+        </div>
+        <p class="plan-desc">Para negocios en crecimiento que quieren automatizar.</p>
+
+        <div class="plan-features">
+          <div class="plan-feature"><div class="feature-check teal">✓</div> Reservas ilimitadas</div>
+          <div class="plan-feature"><div class="feature-check teal">✓</div> Hasta 5 profesionales</div>
+          <div class="plan-feature"><div class="feature-check teal">✓</div> WhatsApp automático</div>
+          <div class="plan-feature"><div class="feature-check teal">✓</div> CRM de clientes</div>
+          <div class="plan-feature"><div class="feature-check teal">✓</div> Analytics completo</div>
+          <div class="plan-feature"><div class="feature-check teal">✓</div> Pagos en línea</div>
+          <div class="plan-feature"><div class="feature-check teal">✓</div> Soporte prioritario</div>
+        </div>
+
+        <a href="#" class="btn btn-primary" style="width:100%;justify-content:center;">
+          Comenzar 14 días gratis
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Enterprise -->
+      <div class="pricing-card">
+        <div class="plan-name">Business</div>
+        <div class="plan-price">
+          <span class="price-currency">$</span>
+          <span class="price-amount" data-monthly="79.900" data-annual="55.900">79.900</span>
+          <span class="price-period">/mes</span>
+        </div>
+        <p class="plan-desc">Para empresas con múltiples sucursales y equipos.</p>
+
+        <div class="plan-features">
+          <div class="plan-feature"><div class="feature-check">✓</div> Todo lo de Pro</div>
+          <div class="plan-feature"><div class="feature-check">✓</div> Profesionales ilimitados</div>
+          <div class="plan-feature"><div class="feature-check">✓</div> Multi-sucursal</div>
+          <div class="plan-feature"><div class="feature-check">✓</div> API de integración</div>
+          <div class="plan-feature"><div class="feature-check">✓</div> Branding personalizado</div>
+          <div class="plan-feature"><div class="feature-check">✓</div> SLA 99.9% uptime</div>
+          <div class="plan-feature"><div class="feature-check">✓</div> Manager dedicado</div>
+        </div>
+
+        <a href="contacto.html" class="btn btn-secondary" style="width:100%;justify-content:center;">
+          Hablar con ventas
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Guarantee -->
+    <div style="text-align:center; margin-top:48px; padding:32px; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-xl);">
+      <div style="font-size:2rem; margin-bottom:12px;">🛡️</div>
+      <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:8px;">Garantía de 30 días</h3>
+      <p style="font-size:0.9rem; color:var(--text-2); max-width:480px; margin:0 auto;">Si en los primeros 30 días no estás satisfecho con AgendaPro, te devolvemos el 100% de tu dinero. Sin preguntas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TRUST ─── -->
+<div class="divider"></div>
+<section class="trust-section">
+  <div class="container">
+    <p class="trust-label">Empresas que confían en AgendaPro</p>
+    <div class="trust-logos">
+      <span class="trust-logo">SpaLux</span>
+      <span class="trust-logo">DentaMax</span>
+      <span class="trust-logo">FitStudio</span>
+      <span class="trust-logo">ClínicaVida</span>
+      <span class="trust-logo">Barbería88</span>
+      <span class="trust-logo">Consulta+</span>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ─── FAQ ─── -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">❓ FAQ</span>
+      <h2>Preguntas frecuentes</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-question">¿Necesito tarjeta de crédito para empezar? <span class="faq-arrow">▾</span></div>
+        <div class="faq-answer">No. El plan Starter es gratis para siempre sin tarjeta. Para el plan Pro tienes 14 días de prueba gratuita sin necesidad de ingresar datos de pago.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">¿Puedo cancelar en cualquier momento? <span class="faq-arrow">▾</span></div>
+        <div class="faq-answer">Sí, absolutamente. No hay contratos ni compromisos. Puedes cancelar tu plan en cualquier momento desde tu panel de configuración.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">¿Cómo funciona la garantía de 30 días? <span class="faq-arrow">▾</span></div>
+        <div class="faq-answer">Si dentro de los primeros 30 días después de contratar un plan pago no quedas satisfecho, te devolvemos el 100% de tu inversión. Solo escríbenos a soporte y procesamos el reembolso en 2-3 días hábiles.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">¿Puedo cambiar de plan más adelante? <span class="faq-arrow">▾</span></div>
+        <div class="faq-answer">Sí. Puedes subir o bajar de plan cuando quieras. Los cambios se aplican de forma inmediata y los cobros se prorratean automáticamente.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">¿AgendaPro funciona para cualquier tipo de negocio? <span class="faq-arrow">▾</span></div>
+        <div class="faq-answer">Sí. AgendaPro funciona para salones de belleza, clínicas, consultorios médicos, gimnasios, barberías, centros de estética, psicólogos, tutores, fotógrafos y cualquier negocio que trabaje con citas o reservas.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">¿Mis datos están seguros? <span class="faq-arrow">▾</span></div>
+        <div class="faq-answer">Totalmente. Usamos cifrado SSL/TLS, backups automáticos diarios y servidores en centros de datos certificados. Cumplimos con GDPR y normativas locales de protección de datos.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ─── -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <span class="section-label">🎯 Sin riesgo</span>
+      <h2>Empieza hoy,<br><span class="gradient-text">decide después</span></h2>
+      <p>14 días gratis con todo incluido. Sin tarjeta. Sin compromisos.</p>
+      <div class="cta-actions">
+        <a href="#" class="btn btn-primary btn-lg">Crear cuenta gratis</a>
+        <a href="contacto.html" class="btn btn-secondary btn-lg">Hablar con ventas</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo" style="margin-bottom:0">
+          <div class="nav-logo-icon">📅</div>
+          AgendaPro
+        </a>
+        <p>La plataforma SaaS de gestión más elegante para PYMEs en Latinoamérica.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Producto</div>
+        <ul class="footer-links">
+          <li><a href="funcionalidades.html">Funcionalidades</a></li>
+          <li><a href="precios.html">Precios</a></li>
+          <li><a href="#">Integraciones</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Empresa</div>
+        <ul class="footer-links">
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a href="#">Privacidad</a></li>
+          <li><a href="#">Términos</a></li>
+          <li><a href="#">Seguridad</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AgendaPro — Todos los derechos reservados.</span>
+      <div class="footer-socials">
+        <a href="#" class="social-btn">𝕏</a>
+        <a href="#" class="social-btn">in</a>
+        <a href="#" class="social-btn">◎</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // Billing toggle
+  const toggleBtns = document.querySelectorAll('.toggle-btn');
+  const priceAmounts = document.querySelectorAll('.price-amount');
+  let currentPeriod = 'monthly';
+
+  toggleBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      toggleBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentPeriod = btn.dataset.period;
+
+      priceAmounts.forEach(el => {
+        const val = parseFloat(el.dataset[currentPeriod]);
+        if (val === 0) {
+          el.textContent = '0';
+        } else {
+          el.textContent = val.toLocaleString('es-CL');
+        }
+      });
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
 </body>
 </html>
